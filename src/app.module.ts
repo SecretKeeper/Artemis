@@ -4,10 +4,12 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
+import { CassandraService } from './cassandra/cassandra.service';
+import { CassandraModule } from './cassandra/cassandra.module';
 
 @Module({
-  imports: [AuthModule, UsersModule],
+  imports: [AuthModule, UsersModule, CassandraModule],
   controllers: [AppController],
-  providers: [AppService, UsersService],
+  providers: [AppService, UsersService, CassandraService],
 })
 export class AppModule {}
