@@ -11,7 +11,13 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter({ logger: true }),
   );
-  app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3000, '0.0.0.0');
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+  await app.listen(3001, '0.0.0.0');
 }
 bootstrap();
