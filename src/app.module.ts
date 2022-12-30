@@ -3,16 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserService } from './users/users.service';
-import { UsersModule } from './users/user.module';
 import { CassandraService } from './cassandra/cassandra.service';
 import { CassandraModule } from './cassandra/cassandra.module';
 import { ProfileModule } from './profile/profile.module';
 import { PrismaModule } from 'nestjs-prisma';
+import { UserModule } from './users/user.module';
 
 @Module({
   imports: [
     AuthModule,
-    UsersModule,
+    UserModule,
     CassandraModule,
     ProfileModule,
     PrismaModule.forRoot(),
