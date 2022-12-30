@@ -36,6 +36,7 @@ export class UserService {
     return this.prisma.user.create({
       data: {
         ...data,
+        avatar: '',
         profile: {
           create: {},
         },
