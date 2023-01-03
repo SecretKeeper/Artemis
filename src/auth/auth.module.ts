@@ -7,11 +7,13 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { AuthController } from './auth.controller';
 import { UserModule } from 'src/users/user.module';
+import { PrismaModule } from 'nestjs-prisma';
 
 @Module({
   imports: [
     UserModule,
     PassportModule,
+    PrismaModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
