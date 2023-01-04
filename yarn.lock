@@ -4229,10 +4229,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-nestjs-prisma@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/nestjs-prisma/-/nestjs-prisma-0.19.0.tgz#19bc9e5eb8f36bc2cb1fcf94507878b0003aeff4"
-  integrity sha512-pEA6wCINzydhmy6J0vtB2/SSyErdCh1WniJXppRZeEOe/jHatRY8mUGH3dzjeZmBg2UiWc11oGq14K3T4yRztw==
+nestjs-prisma@^0.20.0-dev.0:
+  version "0.20.0-dev.2"
+  resolved "https://registry.yarnpkg.com/nestjs-prisma/-/nestjs-prisma-0.20.0-dev.2.tgz#0982b0bebcc39dd73bb7340477530b304c50be34"
+  integrity sha512-m1ljqFIjgcNH4429HtRPG+yg7cg5aDjW0/Wg3bu5DgxrJ3MIWwzoiqX4y/Py4q6v8rBi+sMupyBlP6VMHjM3SQ==
   dependencies:
     "@angular-devkit/core" "^13.3.0"
     "@angular-devkit/schematics" "^13.3.0"
