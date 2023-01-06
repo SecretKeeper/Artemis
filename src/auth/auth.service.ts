@@ -1,10 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from '../users/users.service';
+import { User } from '@prisma/client';
+import { PrismaService } from 'nestjs-prisma';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
+import { UserService } from '../users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
-import { PrismaService } from 'nestjs-prisma';
-import { User } from '@prisma/client';
 import { isEmail } from '@/utilities/functions';
 
 @Injectable()
@@ -20,14 +21,18 @@ export class AuthService {
     password: string,
     isTryingWithEmail = false,
   ): Promise<User> {
-    return this.prisma.user.findFirst({
+    const user = await this.prisma.user.findFirst({
       where: {
-        AND: [
-          { [isTryingWithEmail ? 'email' : 'username']: username_or_email },
-          { password },
-        ],
+        [isTryingWithEmail ? 'email' : 'username']: username_or_email,
       },
     });
+
+    if (user) {
+      const match = await bcrypt.compare(password, user.password);
+      if (match) return user;
+    }
+
+    throw new UnauthorizedException();
   }
 
   async login(credential: LoginDto) {
@@ -36,9 +41,6 @@ export class AuthService {
       credential.password,
       isEmail(credential.username_or_email),
     );
-
-    if (!user) throw new UnauthorizedException();
-
     return {
       access_token: this.jwtService.sign(user),
     };
