@@ -1,4 +1,12 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  DefaultValuePipe,
+  Get,
+  Param,
+  ParseArrayPipe,
+  Query,
+} from '@nestjs/common';
+import { ApiQuery } from '@nestjs/swagger';
 import { UserService } from './users.service';
 
 @Controller()
@@ -10,8 +18,16 @@ export class UsersController {
     return this.userService.user({ id });
   }
 
+  @ApiQuery({ name: 'ids', type: Number, isArray: true, example: [1, 2] })
   @Get('users')
-  async getUsers() {
-    // return this.usersService.getUsers();
+  async getUsersById(
+    @Query(
+      'ids',
+      new DefaultValuePipe([1, 2]),
+      new ParseArrayPipe({ items: Number, separator: ',' }),
+    )
+    ids: number[],
+  ) {
+    return this.userService.users({ where: { id: { in: ids } } });
   }
 }
