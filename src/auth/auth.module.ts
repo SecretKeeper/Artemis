@@ -6,7 +6,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { AuthController } from './auth.controller';
-import { UserModule } from 'src/users/user.module';
+import { UserModule } from './../users/user.module';
 import { PrismaModule } from 'nestjs-prisma';
 
 @Module({
