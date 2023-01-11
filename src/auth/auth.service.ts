@@ -7,12 +7,13 @@ import { UserService } from '../users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { isEmail } from '@/utilities/functions';
+import { TokenService } from './../token/token.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
-    private jwtService: JwtService,
+    private tokenService: TokenService,
     private prisma: PrismaService,
   ) {}
 
@@ -42,7 +43,8 @@ export class AuthService {
       isEmail(credential.username_or_email),
     );
     return {
-      access_token: this.jwtService.sign(user),
+      access_token: await this.tokenService.generateAccessToken(user),
+      refresh_token: await this.tokenService.generateRefreshToken(user),
     };
   }
 
